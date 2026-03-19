@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kyoushuneko Miniatures — STL Gallery</title>
+<meta name="description" content="Browse 1000+ digital STL miniatures from Kyoushuneko — WW2, Fantasy, Grimdark, Sci-Fi wargaming figures for 3D printing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Barlow:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0a0a;
+  --bg2:#111;
+  --bg3:#1a1a1a;
+  --surface:#1e1e1e;
+  --border:rgba(255,255,255,0.08);
+  --border2:rgba(255,255,255,0.15);
+  --text:#f0f0f0;
+  --muted:#888;
+  --faint:#444;
+  --red:#e02020;
+  --red2:#ff3030;
+  --red-dim:rgba(224,32,32,0.15);
+  --white:#ffffff;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* ── HEADER ── */
+header{
+  background:#000;
+  border-bottom:3px solid var(--red);
+  padding:0;
+}
+.header-inner{
+  max-width:1400px;margin:0 auto;
+  display:flex;align-items:stretch;justify-content:space-between;
+  min-height:72px;
+}
+.brand-wrap{
+  display:flex;align-items:center;
+  padding:10px 2rem;
+  flex:1;
+}
+.brand-logo{
+  height:52px;
+  width:auto;
+  object-fit:contain;
+  display:block;
+}
+.header-stats{
+  display:flex;align-items:stretch;
+  border-left:1px solid rgba(255,255,255,0.08);
+}
+.stat{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:0 1.5rem;
+  border-right:1px solid rgba(255,255,255,0.08);
+}
+.stat-number{
+  font-family:'Oswald',sans-serif;
+  font-size:22px;font-weight:700;
+  color:var(--red);
+  line-height:1;
+}
+.stat-label{
+  font-size:10px;color:var(--muted);
+  letter-spacing:.1em;text-transform:uppercase;
+  margin-top:3px;
+}
+
+/* ── STICKY SEARCH BAR ── */
+.controls-bar{
+  position:sticky;top:0;z-index:20;
+  background:rgba(0,0,0,0.96);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+  padding:.65rem 2rem;
+}
+.controls-inner{max-width:1400px;margin:0 auto;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.search-wrap{position:relative;flex:1;min-width:200px}
+.search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:14px;pointer-events:none}
+.search-wrap input{
+  width:100%;height:36px;padding:0 12px 0 32px;
+  background:var(--surface);border:1px solid var(--border2);
+  border-radius:3px;color:var(--text);
+  font-family:'Barlow',sans-serif;font-size:15px;outline:none;
+  transition:border-color .2s;
+}
+.search-wrap input::placeholder{color:var(--faint)}
+.search-wrap input:focus{border-color:var(--red)}
+.select-wrap select{
+  height:36px;padding:0 28px 0 10px;
+  background:var(--surface);border:1px solid var(--border2);
+  border-radius:3px;color:var(--text);
+  font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:.06em;
+  outline:none;cursor:pointer;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23888'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 8px center;
+}
+.select-wrap select option{background:#1e1e1e}
+.results-count{font-size:13px;color:var(--muted);white-space:nowrap;margin-left:auto;font-style:italic}
+
+/* ── CATEGORY TABS ── */
+.tabs-bar{background:var(--bg2);border-bottom:1px solid var(--border)}
+.tabs-inner{max-width:1400px;margin:0 auto;padding:0 2rem;display:flex;overflow-x:auto;scrollbar-width:none}
+.tabs-inner::-webkit-scrollbar{display:none}
+.tab{
+  padding:13px 22px;
+  font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:.1em;
+  color:var(--muted);cursor:pointer;
+  border-bottom:3px solid transparent;border-top:none;border-left:none;border-right:none;
+  background:none;white-space:nowrap;transition:all .15s;text-transform:uppercase;
+}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--red);border-bottom-color:var(--red)}
+
+/* ── COLLECTION PILLS ── */
+.pills-section{max-width:1400px;margin:0 auto;padding:.75rem 2rem .25rem}
+.pills-label{font-size:9px;font-family:'Oswald',sans-serif;letter-spacing:.12em;color:var(--faint);text-transform:uppercase;margin-bottom:7px}
+.pills-wrap{display:flex;gap:6px;flex-wrap:wrap}
+.pill{
+  padding:4px 14px;border-radius:2px;
+  border:1px solid var(--border2);
+  font-size:11px;font-family:'Oswald',sans-serif;letter-spacing:.06em;
+  cursor:pointer;background:transparent;color:var(--muted);
+  transition:all .15s;white-space:nowrap;text-transform:uppercase;
+}
+.pill:hover{border-color:var(--red);color:var(--red)}
+.pill.active{background:var(--red);color:#fff;border-color:var(--red)}
+
+/* ── GRID ── */
+.grid-container{max-width:1400px;margin:0 auto;padding:1.25rem 2rem 4rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+
+/* ── CARD ── */
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:3px;overflow:hidden;
+  transition:transform .18s,border-color .18s,box-shadow .18s;
+  animation:fadeUp .3s ease both;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.card:hover{transform:translateY(-3px);border-color:var(--red);box-shadow:0 6px 24px rgba(224,32,32,0.15)}
+.card-img-wrap{position:relative;width:100%;aspect-ratio:1;overflow:hidden;background:var(--bg3)}
+.card-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
+.card:hover .card-img{transform:scale(1.05)}
+.card-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--faint);font-size:32px}
+.free-badge{
+  position:absolute;top:8px;right:8px;
+  background:var(--red);color:#fff;
+  font-size:9px;font-family:'Oswald',sans-serif;
+  letter-spacing:.1em;padding:2px 8px;border-radius:2px;
+  text-transform:uppercase;
+}
+.card-body{padding:9px 11px 11px;border-top:1px solid var(--border)}
+.card-collection{
+  font-size:9px;font-family:'Oswald',sans-serif;
+  letter-spacing:.1em;color:var(--red);
+  margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  text-transform:uppercase;
+}
+.card-name{
+  font-size:13px;font-weight:500;color:var(--text);
+  line-height:1.3;margin-bottom:9px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:34px;
+}
+.card-footer{display:flex;align-items:center;justify-content:space-between;gap:6px}
+.card-price{font-family:'Oswald',sans-serif;font-size:14px;font-weight:700;color:var(--white)}
+.card-price.free{color:var(--red);font-size:11px;letter-spacing:.06em}
+.mmf-btn{
+  display:inline-block;padding:4px 12px;
+  background:var(--red);color:#fff;
+  font-family:'Oswald',sans-serif;font-size:10px;
+  letter-spacing:.08em;text-decoration:none;
+  border-radius:2px;transition:background .15s;
+  white-space:nowrap;text-transform:uppercase;
+  border:none;
+}
+.mmf-btn:hover{background:var(--red2)}
+
+/* ── EMPTY / LOADING ── */
+.empty-state,.loading{grid-column:1/-1;text-align:center;padding:4rem 2rem;color:var(--muted);font-style:italic;font-size:17px}
+.loading::after{content:'';display:inline-block;width:16px;height:16px;border:2px solid var(--border2);border-top-color:var(--red);border-radius:50%;animation:spin .7s linear infinite;margin-left:10px;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── FOOTER ── */
+footer{background:#000;border-top:3px solid var(--red);padding:1.5rem 2rem;text-align:center}
+.footer-logo{height:36px;margin-bottom:10px;opacity:.85}
+.footer-links{font-size:11px;color:var(--muted);font-family:'Oswald',sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.footer-links a{color:var(--red);text-decoration:none;margin:0 12px}
+.footer-links a:hover{color:var(--red2)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  header,.controls-bar,.pills-section,.grid-container{padding-left:1rem;padding-right:1rem}
+  .brand-logo{height:40px}
+  .header-stats{display:none}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand-wrap">
+      <img class="brand-logo" src="Transparent-White-BG-Logo-Horizontal.png" alt="Kyoushuneko Miniatures">
+    </div>
+    <div class="header-stats">
+      <div class="stat">
+        <span class="stat-number" id="total-count">—</span>
+        <span class="stat-label">Miniatures</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number" id="collection-count">—</span>
+        <span class="stat-label">Collections</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="controls-bar">
+  <div class="controls-inner">
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input type="text" id="search-input" placeholder="Search miniatures by name, collection or tag…" oninput="applyFilters()">
+    </div>
+    <div class="select-wrap">
+      <select id="sort-select" onchange="applyFilters()">
+        <option value="name">Sort: Name A–Z</option>
+        <option value="price_asc">Sort: Price Low–High</option>
+        <option value="price_desc">Sort: Price High–Low</option>
+        <option value="newest">Sort: Newest First</option>
+      </select>
+    </div>
+    <div class="results-count" id="results-count">Loading…</div>
+  </div>
+</div>
+
+<div class="tabs-bar">
+  <div class="tabs-inner" id="tabs-bar"></div>
+</div>
+
+<div class="pills-section" id="pills-section" style="display:none">
+  <div class="pills-label">Collections</div>
+  <div class="pills-wrap" id="pills-wrap"></div>
+</div>
+
+<div class="grid-container">
+  <div class="grid" id="product-grid"><div class="loading">Loading miniatures</div></div>
+</div>
+
+<footer>
+  <img class="footer-logo" src="Transparent-White-BG-Logo-Horizontal.png" alt="Kyoushuneko Miniatures">
+  <div class="footer-links">
+    <a href="https://www.myminifactory.com/stores/kyoushuneko" target="_blank">MyMiniFactory Store</a>
+    <a href="https://www.patreon.com/kyoushuneko" target="_blank">Patreon</a>
+    <a href="https://kyoushuneko.com" target="_blank">Main Website</a>
+  </div>
+</footer>
+
+<script>
+const CATEGORY_MAP = {
+  "WW2": [
+    "WW2 Germany","WW2 German Army","WW2 Finland","WW2 Soviet",
+    "WW2 Imperial Japan","WW2 Australia","WW2 USA","WW2 Great Britain",
+    "WW2 China","WW2 Chinese NRA / Nationalists","WW2 India",
+    "WW2 Papuan New Guinea","WW2 British Commonwealth",
+    "Russian Modern Warfare","Rusian Modern Warfare"
+  ],
+  "Fantasy": [
+    "Japanese Samurai Army (9th Age / WP)","Chinese Cathay (9th age/ WP)",
+    "Araby (9th age/ WP)","Dwarf Army (9th Age / WP)",
+    "High Elves Army (9th age / WP)","Gaelic Wood Elf Army (9th Age / WP)",
+    "Vampire Army (9th age / WP)","Amazon (9th age/ WP)",
+    "Krishnev Army (9th Age / WP)","Green Skins Army",
+    "Ordo Luminis","Mongol Horde","Vikings Historical",
+    "Roman Orc Legion","Dungeons and Dragons",
+    "Fantasy Bundle Set Collection"
+  ],
+  "Grimdark": [
+    "Cyberpunk Squat Dwarves (Grimdark)","Sikh Desert Raiders (Grimdark)",
+    "Shi Gun-Tai Death Korps (Grimdark)","Cyberpunk Green Skins (Grimdark)"
+  ],
+  "Sci-Fi": [
+    "Scifi","SCI-FI Bundle Set Collection"
+  ],
+};
+
+const ALL_CATEGORIES = ["All",...Object.keys(CATEGORY_MAP)];
+let allProducts=[], activeCategory="All", activeCollection="All";
+
+async function loadProducts(){
+  try{
+    const res=await fetch("kyoushuneko_products.csv");
+    if(!res.ok) throw new Error();
+    allProducts=parseCSV(await res.text());
+    init();
+  }catch(e){
+    document.getElementById("product-grid").innerHTML=
+      `<div class="empty-state">Could not load products.<br><small style="font-size:13px;color:var(--faint)">Make sure kyoushuneko_products.csv is in the same folder.</small></div>`;
+  }
+}
+
+function parseCSV(text){
+  const lines=text.trim().split("\n"), headers=parseCSVLine(lines[0]);
+  return lines.slice(1).map(line=>{
+    const vals=parseCSVLine(line), obj={};
+    headers.forEach((h,i)=>obj[h.trim()]=(vals[i]||"").trim());
+    return obj;
+  }).filter(p=>p.name);
+}
+
+function parseCSVLine(line){
+  const r=[];let cur="",inQ=false;
+  for(let i=0;i<line.length;i++){
+    const ch=line[i];
+    if(ch==='"'){inQ=!inQ;}
+    else if(ch===','&&!inQ){r.push(cur);cur="";}
+    else{cur+=ch;}
+  }
+  r.push(cur);return r;
+}
+
+function init(){
+  const cols=[...new Set(allProducts.map(p=>p.collection).filter(Boolean))].sort();
+  document.getElementById("total-count").textContent=allProducts.length.toLocaleString();
+  document.getElementById("collection-count").textContent=cols.length;
+  renderTabs();renderPills();applyFilters();
+}
+
+function renderTabs(){
+  document.getElementById("tabs-bar").innerHTML=ALL_CATEGORIES.map(cat=>
+    `<button class="tab${cat===activeCategory?' active':''}" onclick="setCategory('${cat}')">${cat}</button>`
+  ).join("");
+}
+
+function setCategory(cat){
+  activeCategory=cat;activeCollection="All";
+  renderTabs();renderPills();applyFilters();
+}
+
+function getCollectionsForCategory(cat){
+  if(cat==="All") return [...new Set(allProducts.map(p=>p.collection).filter(Boolean))].sort();
+  const mapped=CATEGORY_MAP[cat]||[];
+  return mapped.filter(m=>allProducts.some(p=>p.collection===m));
+}
+
+function renderPills(){
+  const cols=getCollectionsForCategory(activeCategory);
+  const section=document.getElementById("pills-section");
+  const wrap=document.getElementById("pills-wrap");
+  if(!cols.length){section.style.display="none";return;}
+  section.style.display="block";
+  wrap.innerHTML=[
+    `<button class="pill${activeCollection==='All'?' active':''}" onclick="setCollection('All')">All</button>`,
+    ...cols.map(c=>`<button class="pill${activeCollection===c?' active':''}" onclick="setCollection('${c.replace(/'/g,"\\'")}')">${c}</button>`)
+  ].join("");
+}
+
+function setCollection(col){activeCollection=col;renderPills();applyFilters();}
+
+function applyFilters(){
+  const q=document.getElementById("search-input").value.toLowerCase();
+  const sort=document.getElementById("sort-select").value;
+  const validCols=activeCategory==="All"?null:getCollectionsForCategory(activeCategory);
+
+  let results=allProducts.filter(p=>{
+    if(activeCategory!=="All"&&validCols&&!validCols.includes(p.collection)) return false;
+    if(activeCollection!=="All"&&p.collection!==activeCollection) return false;
+    if(q){
+      const hay=(p.name+" "+p.tags+" "+p.collection).toLowerCase();
+      if(!hay.includes(q)) return false;
+    }
+    return true;
+  });
+
+  results.sort((a,b)=>{
+    if(sort==="name") return a.name.localeCompare(b.name);
+    if(sort==="price_asc") return parseFloat(a.price||0)-parseFloat(b.price||0);
+    if(sort==="price_desc") return parseFloat(b.price||0)-parseFloat(a.price||0);
+    if(sort==="newest") return new Date(b.published_at||0)-new Date(a.published_at||0);
+    return 0;
+  });
+
+  document.getElementById("results-count").textContent=
+    `${results.length.toLocaleString()} of ${allProducts.length.toLocaleString()} miniatures`;
+  renderGrid(results);
+}
+
+function renderGrid(products){
+  const grid=document.getElementById("product-grid");
+  if(!products.length){
+    grid.innerHTML=`<div class="empty-state">No miniatures found — try a different filter or search</div>`;
+    return;
+  }
+  grid.innerHTML=products.map((p,i)=>{
+    const isFree=p.is_free==="True"||p.is_free==="true"||parseFloat(p.price||0)===0;
+    const price=isFree
+      ?`<span class="card-price free">FREE</span>`
+      :`<span class="card-price">$${parseFloat(p.price||0).toFixed(2)}</span>`;
+    const imgEl=p.image_url
+      ?`<img class="card-img" src="${esc(p.image_url)}" alt="${esc(p.name)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+      :"";
+    const ph=`<div class="card-placeholder" style="${p.image_url?'display:none':''}">🗡</div>`;
+    const badge=isFree?`<span class="free-badge">Free</span>`:"";
+    const url=p.url||"https://www.myminifactory.com/stores/kyoushuneko";
+    return `<div class="card" style="animation-delay:${Math.min(i*.02,.5)}s">
+      <div class="card-img-wrap">${imgEl}${ph}${badge}</div>
+      <div class="card-body">
+        <div class="card-collection">${esc(p.collection||"Uncategorized")}</div>
+        <div class="card-name">${esc(p.name)}</div>
+        <div class="card-footer">${price}<a class="mmf-btn" href="${esc(url)}" target="_blank" rel="noopener">Get STL</a></div>
+      </div></div>`;
+  }).join("");
+}
+
+function esc(s){return(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+loadProducts();
+</script>
+</body>
+</html>
